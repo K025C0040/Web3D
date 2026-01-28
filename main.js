@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 // 1. シーン（舞台）を作る
 const scene = new THREE.Scene();
@@ -14,9 +15,11 @@ const renderer = new THREE.WebGLRenderer({
     antialias: false, // ギザギザ防止をオフにすると少し軽くなる
     powerPreference: "high-performance" // GPUを本気で使わせる
 });
+
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement); // HTMLにキャンバスを追加
-
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true; // 慣性を利かせて滑らかにする
 // 4. ライト（照明）を置く（これがないとモデルが真っ黒！）
 // 正面からの光
 const topLight = new THREE.DirectionalLight(0xffffff, 4);
@@ -74,6 +77,7 @@ function animate() {
     if (myModel) {
         myModel.rotation.y += 0.01; 
     }
+    controls.update(); // これが必要！
     
     renderer.render(scene, camera);
 }
