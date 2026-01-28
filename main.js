@@ -28,17 +28,17 @@ controls.enableDamping = true; // 慣性を利かせて滑らかにする
 
 // 4. ライト（照明）を置く（これがないとモデルが真っ黒！）
 // 正面からの光
-const topLight = new THREE.DirectionalLight(0xffffff, 4);
+const topLight = new THREE.DirectionalLight(0xffffff, 3);
 topLight.position.set(5, 5, 5);
 scene.add(topLight);
 
 // 横からの青っぽい補助光（エッジが立ってカッコよくなる）
-const sideLight = new THREE.PointLight(0x00ffff, 2);
-sideLight.position.set(-5, 2, 0);
+const sideLight = new THREE.PointLight(0xFB377E, 3);
+sideLight.position.set(5, 2, 0);
 scene.add(sideLight);
 
 // 下からの反射光
-const backLight = new THREE.PointLight(0xff00ff, 0.8);
+const backLight = new THREE.PointLight(0xffffff, 0.5);
 backLight.position.set(0, -5, -2);
 scene.add(backLight);
 
